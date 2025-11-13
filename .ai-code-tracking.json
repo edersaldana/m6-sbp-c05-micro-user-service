@@ -319,12 +319,221 @@
       "aiTool": "AI Assistant",
       "detectionMethod": "REALTIME_SPEED_ANALYSIS",
       "lineCount": 2
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Docente/m6-sbp-c05-micro-user-service/src/test/java/com/tecsup/app/micro/user/service/UserServiceTest.java",
+      "timestamp": 1762832727825,
+      "startOffset": 228,
+      "endOffset": 1638,
+      "codeContent": "BeforeEach;\nimport org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.extension.ExtendWith;\nimport org.mockito.Mock;\nimport org.mockito.junit.jupiter.MockitoExtension;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.boot.test.context.SpringBootTest;\nimport org.springframework.test.context.bean.override.mockito.MockitoBean;\n\nimport java.util.Optional;\n\nimport static org.junit.jupiter.api.Assertions.*;\nimport static org.mockito.Mockito.when;\n\n@SpringBootTest\nclass UserServiceTest {\n\n    @MockitoBean\n    private UserRepository userRepository;\n\n    @Autowired\n    private UserService userService;\n\n    @Autowired\n    private UserMapper userMapper;\n\n\n    @Test\n    void getUserById() {\n        Long ID \u003d 100L;\n        String NAME \u003d \"Jaime\";\n        String EMAIL \u003d \"jaime@demo.com\";\n\n        // Initial Condition\n        User existingUser \u003d User.builder()\n                .id(ID)\n                .name(NAME)\n                .email(EMAIL)\n                .build(); // new User(ID, NAME, EMAIL);\n\n        // Mocking the repository behavior\n        when(userRepository.findById(100L)).thenReturn(Optional.of(userMapper.toEntity(existingUser)));\n\n        // Execute the service method\n        User realUser \u003d userService.getUserById(100L);\n\n        // Validate the results\n        assertNotNull(realUser);\n\n        // hope values, real values\n        assertEquals(ID",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 51
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762993423780,
+      "startOffset": 0,
+      "endOffset": 81,
+      "codeContent": "import static org.junit.jupiter.api.Assertions.*;\nclass ProductServiceTest {\n  \n}",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 4
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762993423817,
+      "startOffset": 0,
+      "endOffset": 45,
+      "codeContent": "package com.tecsup.app.micro.product.service;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762993423922,
+      "startOffset": 125,
+      "endOffset": 152,
+      "codeContent": "public void dummy() {\n    }",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 2
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762993423963,
+      "startOffset": 129,
+      "endOffset": 170,
+      "codeContent": "@org.junit.jupiter.api.Test\nvoid () {\n  }",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 3
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762993424020,
+      "startOffset": 47,
+      "endOffset": 81,
+      "codeContent": "import org.junit.jupiter.api.Test;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/ProductServiceTest.java",
+      "timestamp": 1762993444659,
+      "startOffset": 135,
+      "endOffset": 173,
+      "codeContent": "org.springframework.boot.test.context.",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/ProductServiceTest.java",
+      "timestamp": 1762993444666,
+      "startOffset": 81,
+      "endOffset": 141,
+      "codeContent": "import org.springframework.boot.test.context.SpringBootTest;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762993444691,
+      "startOffset": 81,
+      "endOffset": 142,
+      "codeContent": "\nimport org.springframework.boot.test.context.SpringBootTest;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 2
+    },
+    {
+      "filePath": "/ProductServiceTest.java",
+      "timestamp": 1762994325688,
+      "startOffset": 244,
+      "endOffset": 264,
+      "codeContent": "IntellijIdeaRulezzz ",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762994337602,
+      "startOffset": 251,
+      "endOffset": 291,
+      "codeContent": "com.tecsup.app.micro.product.repository.",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762994337618,
+      "startOffset": 47,
+      "endOffset": 112,
+      "codeContent": "import com.tecsup.app.micro.product.repository.ProductRepository;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/ProductServiceTest.java",
+      "timestamp": 1762994339505,
+      "startOffset": 47,
+      "endOffset": 113,
+      "codeContent": "import com.tecsup.app.micro.product.repository.ProductRepository;\n",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 2
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762994349090,
+      "startOffset": 314,
+      "endOffset": 369,
+      "codeContent": "org.springframework.test.context.bean.override.mockito.",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762994349105,
+      "startOffset": 208,
+      "endOffset": 282,
+      "codeContent": "import org.springframework.test.context.bean.override.mockito.MockitoBean;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/ProductServiceTest.java",
+      "timestamp": 1762994357114,
+      "startOffset": 208,
+      "endOffset": 283,
+      "codeContent": "\nimport org.springframework.test.context.bean.override.mockito.MockitoBean;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 2
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762994368002,
+      "startOffset": 148,
+      "endOffset": 210,
+      "codeContent": "import org.springframework.beans.factory.annotation.Autowired;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
+    },
+    {
+      "filePath": "/ProductServiceTest.java",
+      "timestamp": 1762994370942,
+      "startOffset": 147,
+      "endOffset": 210,
+      "codeContent": "\nimport org.springframework.beans.factory.annotation.Autowired;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 2
+    },
+    {
+      "filePath": "/home/esaldana/Projects/IntelliJ_Pruebas/BootCamp_Mod_06_Jenkis/Personal/m6-sbp-c05-micro-product-service/src/test/java/com/tecsup/app/micro/product/service/ProductServiceTest.java",
+      "timestamp": 1762994395790,
+      "startOffset": 47,
+      "endOffset": 104,
+      "codeContent": "import com.tecsup.app.micro.product.mapper.ProductMapper;",
+      "aiProbability": 90,
+      "aiTool": "AI Assistant",
+      "detectionMethod": "REALTIME_SPEED_ANALYSIS",
+      "lineCount": 1
     }
   ],
   "toolStats": {
     "AI Assistant": {
-      "usageCount": 29,
-      "totalLines": 70
+      "usageCount": 48,
+      "totalLines": 149
     }
   }
 }
