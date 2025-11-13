@@ -30,5 +30,7 @@ public class UserService {
         List<UserEntity> entities = userRepository.findAll();
         return this.mapper.toDomain(entities);
 
+
+
     }
 }
