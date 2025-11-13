@@ -1,6 +1,6 @@
 # Dockerfile for User Service
 # Use Eclipse Temurin JRE 21 as the base image
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:17-jre
 
 # Set the working directory inside the container
 WORKDIR /app
