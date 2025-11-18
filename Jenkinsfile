@@ -29,6 +29,13 @@ pipeline {
             }
         }
 
+        stage('Docker build') {
+            steps {
+                echo 'Build Docker image'
+                sh 'docker build -t user-service-ejsm:1.0 .'
+            }
+        }
+
     }
 
     post {
