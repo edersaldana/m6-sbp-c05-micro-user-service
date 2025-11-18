@@ -36,6 +36,16 @@ pipeline {
             }
         }
 
+        stage('Docker Compose Restart') {
+            steps {
+                echo 'Restarting user services'
+                sh """
+                    docker compose up -d postgres-user-dev user-service-dev
+
+                """
+            }
+        }
+
     }
 
     post {
