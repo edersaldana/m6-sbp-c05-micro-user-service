@@ -29,8 +29,24 @@ public class UserService {
 
         List<UserEntity> entities = userRepository.findAll();
         return this.mapper.toDomain(entities);
+    }
 
+    public User createUser(User user) {
+        // Convertir el DTO a Entity
+        UserEntity entity = mapper.toEntity(user);
 
+        // Guardar en BD
+        UserEntity saved = userRepository.save(entity);
 
+        // Retornar DTO
+        return mapper.toDomain(saved);
+    }
+
+    public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("User no encontrado con id: " + id);
+        }
+
+        userRepository.deleteById(id);
     }
 }

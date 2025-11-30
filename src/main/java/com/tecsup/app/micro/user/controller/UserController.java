@@ -4,11 +4,9 @@ import com.tecsup.app.micro.user.dto.User;
 import com.tecsup.app.micro.user.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +31,17 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User created = userService.createUser(user);
+        return new ResponseEntity<>(created, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        log.info("REST requestpara eliminar usuario con id: {}", id);
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
