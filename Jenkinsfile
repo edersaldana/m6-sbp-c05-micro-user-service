@@ -29,22 +29,7 @@ pipeline {
             }
         }
 
-        stage('Docker build') {
-            steps {
-                echo 'Build Docker image'
-                sh 'docker build -t user-service-ejsm:1.0 .'
-            }
-        }
 
-        stage('Docker Compose Restart') {
-            steps {
-                echo 'Restarting user services'
-                sh """
-                    docker compose up -d postgres-user-dev user-service-dev
-
-                """
-            }
-        }
 
     }
 
