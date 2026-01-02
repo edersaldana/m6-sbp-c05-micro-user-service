@@ -1,16 +1,18 @@
 package com.tecsup.app.micro.user.service;
 
 import com.tecsup.app.micro.user.dto.User;
+import com.tecsup.app.micro.user.entity.Role;
 import com.tecsup.app.micro.user.entity.UserEntity;
 import com.tecsup.app.micro.user.mapper.UserMapper;
 import com.tecsup.app.micro.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Optional;
 
+import static java.time.LocalTime.now;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,7 +20,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class UserServiceTest {
 
-    @MockitoBean
+    @MockBean
     private UserRepository userRepository;
 
     @Autowired
@@ -34,84 +36,59 @@ class UserServiceTest {
         String NAME = "Eder";
         String EMAIL = "eder@gmail.com";
 
-        // Initial Condition
         User existingUser = User.builder()
                 .id(ID)
                 .name(NAME)
                 .email(EMAIL)
-                .build(); // new User(ID, NAME, EMAIL);
+                .build();
 
-        // Mocking the repository behavior
-        when(userRepository.findById(100L)).thenReturn(Optional.of(userMapper.toEntity(existingUser)));
+        when(userRepository.findById(ID))
+                .thenReturn(Optional.of(userMapper.toEntity(existingUser)));
 
-        // Execute the service method
-        User realUser = userService.getUserById(100L);
+        User realUser = userService.getUserById(ID);
 
-        // Validate the results
         assertNotNull(realUser);
-
-        // hope values, real values
         assertEquals(ID, realUser.getId());
         assertEquals(NAME, realUser.getName());
         assertEquals(EMAIL, realUser.getEmail());
     }
 
     @Test
-    void getAllUsers() {
-    }
-
-    @Test
     void testCreateUser() {
         Long NEW_ID = 1L;
 
-        // ---------- DTO enviado desde el controller ----------
         User inputDTO = User.builder()
-                .id(null)
                 .name("Eder")
                 .email("eder@gmail.com")
-                .phone("999999999")
-                .address("Av. Lima 123")
+                .role(Role.valueOf("USER"))
+                .password("")
                 .build();
 
-        // ---------- Entity antes de guardar ----------
         UserEntity entityToSave = userMapper.toEntity(inputDTO);
 
-        // ---------- Entity que el repositorio devolverá (mock) ----------
         UserEntity savedEntity = new UserEntity(
-                NEW_ID,
-                "Eder",
-                "eder@gmail.com",
-                "999999999",
-                "Av. Lima 123"
         );
 
-        // mock del repository
         when(userRepository.save(entityToSave)).thenReturn(savedEntity);
 
-        // ---------- Ejecutar servicio ----------
         User result = userService.createUser(inputDTO);
 
-        // ---------- Validaciones ----------
         assertNotNull(result);
         assertEquals(NEW_ID, result.getId());
         assertEquals("Eder", result.getName());
         assertEquals("eder@gmail.com", result.getEmail());
-        assertEquals("999999999", result.getPhone());
-        assertEquals("Av. Lima 123", result.getAddress());
-
+        assertEquals("", result.getPassword());
+        assertEquals("USER", result.getRole());
     }
 
     @Test
     void testDeleteUser() {
         Long USER_ID = 1L;
 
-        // --- El mock dice que el usuario SÍ existe ---
         when(userRepository.existsById(USER_ID)).thenReturn(true);
 
-        // --- Ejecutar ---
         assertDoesNotThrow(() -> userService.deleteUser(USER_ID));
 
-        // --- Validar que se llamó deleteById ---
         verify(userRepository).deleteById(USER_ID);
     }
 
@@ -119,7 +96,6 @@ class UserServiceTest {
     void testDeleteUserNotFound() {
         Long USER_ID = 1L;
 
-        // --- El mock dice que el usuario NO existe ---
         when(userRepository.existsById(USER_ID)).thenReturn(false);
 
         RuntimeException exception = assertThrows(RuntimeException.class,
@@ -128,6 +104,4 @@ class UserServiceTest {
         assertEquals("User no encontrado con id: " + USER_ID,
                 exception.getMessage());
     }
-
-
 }
