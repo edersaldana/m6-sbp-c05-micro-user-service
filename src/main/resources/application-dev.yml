@@ -1,7 +1,6 @@
 spring:
-
   datasource:
-    url: jdbc:postgresql://localhost:5432/userdb
+    url: jdbc:postgresql://postgres-user-dev:5432/userdb
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -16,5 +15,3 @@ spring:
     locations: classpath:db/migration/dev
     baseline-on-migrate: true
     validate-on-migrate: true
-
-
