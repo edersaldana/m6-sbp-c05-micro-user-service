@@ -1,58 +1,63 @@
 package com.tecsup.app.micro.user.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import com.tecsup.app.micro.user.dto.User;
+import com.tecsup.app.micro.user.entity.Role;
+import com.tecsup.app.micro.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@AutoConfigureMockMvc
 @SpringBootTest
-@Slf4j
+@AutoConfigureMockMvc(addFilters = false)
 class UserControllerTest {
-
-    // Object Mapper
-    private static final ObjectMapper om = new ObjectMapper();
 
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private UserService userService;
 
     @Test
     void getAllUsers() throws Exception {
-        int NRO_RECORD = 6;
-        final int ID_FIRST_RECORD = 1;
 
-        this.mockMvc.perform(get("/api/users"))
+        User u1 = new User(1L, "Juan Pérez", "juan.perez@example.com","12345",Role.ADMIN);
+        User u2 = new User(2L, "Ana Torres", "ana@example.com","12345",Role.USER);
+
+        when(userService.getAllUsers())
+                .thenReturn(List.of(u1, u2));
+
+        mockMvc.perform(get("/api/users"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(jsonPath("$", hasSize(NRO_RECORD)))
-                .andExpect(jsonPath("$[0].id", is(ID_FIRST_RECORD)));
-
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", is(1)));
     }
 
     @Test
     void getUserById() throws Exception {
 
-        String NAME = "Juan Pérez";
-        String EMAIL = "juan.perez@example.com";
+        User user = new User(1L, "Juan Pérez", "juan.perez@example.com","12345", Role.USER);
 
-        this.mockMvc.perform(get("/api/users/1"))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
+        when(userService.getUserById(1L))
+                .thenReturn(user);
+
+        mockMvc.perform(get("/api/users/1"))
                 .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is(NAME)))
-                .andExpect(jsonPath("$.email", is(EMAIL)));
+                .andExpect(jsonPath("$.name", is("Juan Pérez")))
+                .andExpect(jsonPath("$.email", is("juan.perez@example.com")));
     }
 }
