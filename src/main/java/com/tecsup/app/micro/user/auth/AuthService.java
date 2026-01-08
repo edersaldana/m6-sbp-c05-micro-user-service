@@ -25,9 +25,9 @@ public class AuthService {
         }
 
         String token = jwtService.generateToken(user);
-        //User userDto = userMapper.toDomain(user);
+        User userDto = userMapper.toDomain(user);
 
-        //return new AuthResponse(token, userDto);
-        return new AuthResponse(token);
+        return new AuthResponse(token, userDto);
+        //return new AuthResponse(token);
     }
 }
