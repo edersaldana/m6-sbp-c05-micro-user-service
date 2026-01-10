@@ -18,4 +18,11 @@ public class AuthController {
     public AuthResponse login(@RequestBody LoginRequest request) {
         return authService.login(request);
     }
+
+    // AGREGA ESTE MÉTODO
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+        authService.register(request); // Debes crear este método en AuthService
+        return ResponseEntity.ok("Usuario registrado exitosamente");
+    }
 }
