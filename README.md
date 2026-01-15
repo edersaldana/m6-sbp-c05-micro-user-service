@@ -1,31 +1,24 @@
-## Creación del Dockerfile
+# User Service (Identity & Auth)
 
-### Generar el JAR del proyecto Spring Boot
-```declarative
-mvn clean package -DskipTests
-```
-- -DskipTests : Omite la ejecución de las pruebas
+Este microservicio es el corazón de la seguridad del ecosistema. Gestiona la identidad de los usuarios, la autenticación y el control de acceso basado en roles.
 
-### Verificar que el JAR se haya creado correctamente
-```declarative  
-ls target/
-```
-### Verificar que el JAR se ejecute correctamente
-```declarative  
-java -jar target/nombre-del-archivo.jar 
-```
+## Especificaciones
+* **Puerto:** `8081`
+* **Base de Datos:** `user_db` (PostgreSQL)
+* **Seguridad:** JWT (JSON Web Tokens)
 
-### Crea la imagen
-```
-docker build -t user-service:1.0 .
-```
+## Funcionalidades
+- **Registro:** Creación de nuevos usuarios con contraseñas encriptadas.
+- **Autenticación:** Validación de credenciales y generación de Token JWT.
+- **Autorización:** Asignación de roles (`USER`, `ADMIN`).
 
-### Ejecutar el contenedor
-```
-docker run -d -p 8081:8081 --name user-service user-service:1.0
-```
+## Endpoints Principales
+| Método | Endpoint         | Descripción                | Acceso |
+| :---   | :---             | :---                       | :---   |
+| `POST` | `/auth/register` | Registro de nuevo usuario  | Público |
+| `POST` | `/auth/login`    | Login y obtención de Token | Público |
 
-### Verificar que el contenedor falla porque no existe la base de datos
-```
-docker logs -f user-service
-```
+##  Instalación
+1. Crear base de datos `user_db` en PostgreSQL.
+2. Configuraciones credenciales en `src/main/resources/application.yml`, `src/main/resources/application-dev.yml`, `src/main/resources/application-local.yml`.
+3. Ejecutar: `mvn spring-boot:run`.
